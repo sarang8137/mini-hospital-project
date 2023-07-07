@@ -28,4 +28,6 @@ urlpatterns = [
     path('service',ServiceView.as_view(),name="service"),
     path('navbar',NavbarView.as_view(),name="nav"),
     path('doc/',include('doctor.urls')),
+    path('pat/',include('patient.urls')),
+    path('logout',LgOut.as_view(),name="logout"),
 ]

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 {% load static %}
 <html lang="en" dir="ltr">
 
@@ -7,6 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>HMS - Django</title>
+
+
   <style type="text/css">
     body {
       color: #aa082e;
@@ -50,39 +51,36 @@
 
 </head>
 
-
 <body>
   {% include "navbar.html" %}
   <br>
   <br>
-  <br>
-  <br>
+  <br><br>
 
-
-
-
-  <!--- signup page for doctor by admin(sumit)  ---------->
-  <form method="post" enctype="multipart/form-data">
+  <!--- login page for patient by admin(sumit)  ---------->
+  <form method="post">
     {% csrf_token %}
-    <div class="container register-form container-fluid">
-      
+    <div class="container register-form">
       <div class="form">
         <div class="note">
-          <p>Register In Hospital</p>
+          <p>Patient Login Page</p>
         </div>
-        <table class="table table-dark">
-          {{form.as_table}}
-          {{form1.as_table}}
-      </table>
-          <button type="submit" class="btnSubmit text-center">Login</button>
-          <div class="text-center">Do not have account? <a href="{% url 'docsignin' %}">Signup here</a></div>
+
+        <div class="form-content">
+          <table class="table table-dark">
+            {{form.as_table}}
+        </table>
+                 
+          <button type="submit" class="btnSubmit">Login</button>
+          <div class="text-center">Do not have account? <a href="{% url 'patsignup' %}">Signup here</a></div>
         </div>
       </div>
-
     </div>
 
   </form>
-</body>
 
+  <br><br><br>
+
+</body>
 
 </html>
