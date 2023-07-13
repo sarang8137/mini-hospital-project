@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from doctor.forms import *
-from doctor.models import Appointment
+from patient.models import Appointment
 
 
 # Create your views here.
@@ -28,13 +28,14 @@ class PatientDischarge(TemplateView):
 class PatientSignUp(View):
     def get(self,request,*args,**kwargs):
         form=PatientUserForm()
-        form2=PatientForm()
-        return render(request,"patientsignup.html",{"form":form,"form1":form2})
+        form1=PatientForm()
+        return render(request,"patientsignup.html",{"form":form,"form1":form1})
     def post(self,request,*args,**Kwargs):
         form_data=PatientUserForm(data=request.POST)
         form_data1=PatientForm(data=request.POST)
-        if form_data.is_valid():
+        if form_data.is_valid() and form_data1.is_valid():
             form_data.save()
+            form_data1.save()
             messages.success(request,"Registration Success")
             return redirect("home")
         else:
@@ -64,8 +65,9 @@ class PatientSignInView(View):
 class PatientAppointment(View):
     def get(self,request,*args,**kwargs):
         form=AppointmentForm()
-        return render(request,"patient_book_appointment.html",{"form":form})
-    def post(self,request,*args,**Kwargs):
+        doc=Doctor.objects.all()
+        return render(request,"patient_book_appointment.html",{"form":form,"doc":doc})
+    def post(self,request,*args,**kwargs):
         form_data=AppointmentForm(data=request.POST)
         if form_data.is_valid():
             form_data.save()
@@ -73,3 +75,26 @@ class PatientAppointment(View):
             return redirect("home")
         else:
             return render(request,"patientsignup.html",{"form":form_data})
+
+# class PatientAppointment(TemplateView):
+#     template_name="patient_book_appointment"
+#     def post(self,request):
+#         pat=request.POST.get("pat")
+#         doc=request.POST.get("doc")
+#         patname=request.POST.get("patname")
+#         docname=request.POST.get("docname")
+#         appdate=request.POST.get("appdate")
+#         desc=request.POST.get("desc")
+#         sts=request.POST.get("sts")
+
+#         Appointment.objects.create(
+#             patient=pat,
+#             doctor=doc,
+#             patientName=patname,
+#             doctorName=docname,
+#             appointmentDate=appdate,
+#             description=desc,
+#             status=sts
+#         )
+#         return render(request,"patientsignup.html")
+    

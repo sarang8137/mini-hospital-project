@@ -68,11 +68,19 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-content">
-              <table class="table table-dark">
-                {{form.as_table}}
-            </table>
+             <input type="tex" name="pat" >
+              <select name="doc" id="">
+                {% for i in doc %}
+                <option value="{{i.id}}">{{i.Name}}</option>
+                {%endfor%}
+              </select>
+             <input type="text" name="patname" >
+             <input type="text" name="docname" >
+             <input type="date" name="appdate" >
+             <input type="text" name="desc" >
+             <input type="checkbox" name="sts" >
           
-          </div>
+            </div>
 
         </div>
         <button type="submit" class="btnSubmit">Book</button>

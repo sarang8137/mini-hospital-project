@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from . import models
+from patient.models import *
 from django.contrib.auth.forms import UserCreationForm
-from .models import Doctor
+from .models import *
 
 class SignUpForm(UserCreationForm):
     class Meta:
@@ -20,19 +20,29 @@ class SignInForm(forms.Form):
 class DoctorUserForm(UserCreationForm):
     class Meta:
         model=User
-        fields=['first_name','last_name','username','password1','password2']
+        fields=['username','password1','password2']
         widgets = {
-            "first_name":forms.TextInput(attrs={'placeholder':'first_name','class':'form-control'}),
-            "last_name":forms.TextInput(attrs={'placeholder':'last_name','class':'form-control'}),
-            "email":forms.EmailInput(attrs={'placeholder':'email','class':'form-control'}),
             "username":forms.TextInput(attrs={'placeholder':'username','class':'form-control'}),
             'password1': forms.PasswordInput(attrs={'placeholder':'Enter password','class':'form-control'}),
             'password2': forms.PasswordInput(attrs={'placeholder':'Enter password','class':'form-control'}),
         }
 class DoctorForm(forms.ModelForm):
     class Meta:
-        model=models.Doctor
-        fields=['address','mobile','department','status','profile_pic']
+        model=Doctor
+        fields="__all__"
+
+# class DoctorUserForm(forms.ModelForm):
+#     class Meta:
+#         model=User
+#         fields=['username','password']
+#         widgets = {
+#         'password': forms.PasswordInput()
+#         }
+# class DoctorForm(forms.ModelForm):
+#     class Meta:
+#         model=Doctor
+#         fields="__all__"
+
 
 
 
@@ -45,25 +55,25 @@ class PatientUserForm(forms.ModelForm):
         'password': forms.PasswordInput()
         }
 class PatientForm(forms.ModelForm):
-    assignedDoctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Name and Department", to_field_name="user_id")
+    # assignedDoctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Name and Department", to_field_name="user_id")
     class Meta:
-        model=models.Patient
+        model=Patient
         fields=['address','mobile','status','symptoms','profile_pic']
 
 
 
 class AppointmentForm(forms.ModelForm):
-    doctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Doctor Name and Department", to_field_name="user_id")
-    patientId=forms.ModelChoiceField(queryset=models.Patient.objects.all().filter(status=True),empty_label="Patient Name and Symptoms", to_field_name="user_id")
+    # doctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Doctor Name and Department", to_field_name="user_id")
+    # patientId=forms.ModelChoiceField(queryset=models.Patient.objects.all().filter(status=True),empty_label="Patient Name and Symptoms", to_field_name="user_id")
     class Meta:
-        model=models.Appointment
+        model=Appointment
         fields=['description','status']
 
 
 class PatientAppointmentForm(forms.ModelForm):
-    doctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Doctor Name and Department", to_field_name="user_id")
+    # doctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Doctor Name and Department", to_field_name="user_id")
     class Meta:
-        model=models.Appointment
+        model=Appointment
         fields=['description','status']
 
 

@@ -37,7 +37,8 @@ class DoctorBase(TemplateView):
 class DoctorPatient(TemplateView):
     template_name="doctor_patient.html"
 class DoctorAppointment(TemplateView):
-    template_name="doctor_view_appointment.html"
+    def get(self,request):
+        Appointment
 class DoctorPatientView(TemplateView):
     template_name="doctor_view_patient.html"
 class DoctorPatientDischarge(TemplateView):
@@ -84,14 +85,15 @@ class DoctorPatientDischarge(TemplateView):
 
 class DoctorSignUp(View):
     def get(self,request,*args,**kwargs):
-        form=DoctorUserForm()
-        form2=DoctorForm()
-        return render(request,"doctorsignup.html",{"form":form,"form1":form2})
+        form=DoctorForm()
+        form1=DoctorUserForm()
+        return render(request,"doctorsignup.html",{"form":form,"form1":form1})
     def post(self,request,*args,**Kwargs):
-        form_data=DoctorUserForm(data=request.POST)
-        form_data1=DoctorForm(data=request.POST)
-        if form_data.is_valid():
+        form_data=DoctorForm(data=request.POST)
+        form_data1=DoctorUserForm(data=request.POST)
+        if form_data.is_valid() and form_data1.is_valid():
             form_data.save()
+            form_data1.save()
             messages.success(request,"Registration Success")
             return redirect("home")
         else:
