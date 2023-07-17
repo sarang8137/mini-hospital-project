@@ -34,55 +34,33 @@ class AdminBase(TemplateView):
     template_name="admin_base.html"
 class DoctorBase(TemplateView):
     template_name="doctor_base.html"
+
 class DoctorPatient(TemplateView):
     template_name="doctor_patient.html"
-class DoctorAppointment(TemplateView):
-    def get(self,request):
-        Appointment
-class DoctorPatientView(TemplateView):
-    template_name="doctor_view_patient.html"
+    # def get(self,request,*args,**kwargs):
+    #         data=Patient.objects.all()
+    #         return render(request,"doctor_patient.html",{"data":data})
+
+class DoctorAppointment(View):
+    def get(self,request,*args,**kwargs):
+            data=Appointment.objects.all()
+            return render(request,"doctor_view_appointment.html",{"data":data})
+
+class DoctorPatientView(View):
+    # template_name="doctor_view_patient.html"
+    def get(self,request,*args,**kwargs):
+            data=Patient.objects.all()
+            return render(request,"doctor_view_patient.html",{"data":data})
+
 class DoctorPatientDischarge(TemplateView):
-    template_name="doctor_view_discharge_patient.html"
-    
-    
-    
-    
-    
-    
-# class AdminSignUp(View):
-#     def get(self,request,*args,**kwargs):
-#         form=SignUpForm()
-#         return render(request,"signup.html",{"form":form})
-#     def post(self,request,*args,**Kwargs):
-#         form_data=SignUpForm(data=request.POST)
-#         if form_data.is_valid():
-#             form_data.save()
-#             messages.success(request,"Registration Success")
-#             return redirect("home")
-#         else:
-#             return render(request,"signup.html",{"form":form_data})
+    # template_name="doctor_view_discharge_patient.html"
+    def get(self,request,*args,**kwargs):
+        data=Patient.objects.all()
+        return render(request,"doctor_view_discharge_patient.html",{"data":data})
 
-# class AdminSignInView(View):
-#     def get(self,request,*args,**kwargs):
-#         form=SignInForm()
-#         return render(request,"signin.html",{"form":form})
-#     def post(self,request,*args,**kwargs):
-#         form_date=SignInForm(data=request.POST)
-#         if form_date.is_valid():
-#             uname=form_date.cleaned_data.get("username")
-#             pswd=form_date.cleaned_data.get("password")
-#             user=authenticate(request,username=uname,password=pswd)
-#             # return HttpResponse(user)
-#             if user:
-#                 login(request,user)  #session created
-#                 messages.success(request,"sign in completed")
-#                 return redirect("admbase")
-#             else:
-#                 messages.error(request,"invalid username & password")
-#                 return render(request,"signin.html",{"form":form_date})
-#         else:
-#             return render(request,"signin.html",{"form":form_date})
-
+    
+    
+    
 class DoctorSignUp(View):
     def get(self,request,*args,**kwargs):
         form=DoctorForm()
