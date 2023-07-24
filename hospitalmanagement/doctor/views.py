@@ -37,9 +37,6 @@ class DoctorBase(TemplateView):
 
 class DoctorPatient(TemplateView):
     template_name="doctor_patient.html"
-    # def get(self,request,*args,**kwargs):
-    #         data=Patient.objects.all()
-    #         return render(request,"doctor_patient.html",{"data":data})
 
 class DoctorAppointment(View):
     def get(self,request,*args,**kwargs):
@@ -52,13 +49,7 @@ class DoctorPatientView(View):
             data=Patient.objects.all()
             return render(request,"doctor_view_patient.html",{"data":data})
 
-class DoctorPatientDischarge(TemplateView):
-    # template_name="doctor_view_discharge_patient.html"
-    def get(self,request,*args,**kwargs):
-        data=Patient.objects.all()
-        return render(request,"doctor_view_discharge_patient.html",{"data":data})
 
-    
     
     
 class DoctorSignUp(View):

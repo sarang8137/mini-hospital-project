@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from doctor.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +32,4 @@ urlpatterns = [
     path('doc/',include('doctor.urls')),
     path('pat/',include('patient.urls')),
     path('logout',LgOut.as_view(),name="logout"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

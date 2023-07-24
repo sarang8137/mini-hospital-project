@@ -68,17 +68,15 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-content">
-             <input type="tex" name="pat" >
-              <select name="doc" id="">
+             <input type="text" name="patname" placeholder="Enter patient Name">
+             
+               <select name="docname" id="docname">
                 {% for i in doc %}
-                <option value="{{i.id}}">{{i.Name}}</option>
+                <option value="{{i.Name}}">{{i.Name}}</option>
                 {%endfor%}
               </select>
-             <input type="text" name="patname" placeholder="Enter Name">
-             <input type="text" name="docname" placeholder="Enter Doctor Name">
              <input type="date" name="appdate" placeholder="Appointment Date">
              <input type="textarea" name="desc" placeholder="Description">
-             <input type="checkbox" name="sts" >
           
             </div>
 
@@ -88,7 +86,6 @@
     </div>
   </div>
 </form>
-
 
 
 {% endblock content %}

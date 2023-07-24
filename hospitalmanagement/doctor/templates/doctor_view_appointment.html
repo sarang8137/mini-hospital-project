@@ -31,20 +31,18 @@
       <thead>
         <tr>
           <th>Patient Name</th>
+          <th>Doctor Name</th>
           <th>Picture</th>
           <th>Description</th>
-          <th>Contact</th>
-          <th>Address</th>
           <th>Appointment Date</th>
         </tr>
       </thead>
       {% for a in data %}
       <tr>
         <td>{{a.patientName}}</td>
+        <td>{{a.doctorName}}</td>
         <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
         <td>{{a.description}}</td>
-        <td>{{a.mobile}}</td>
-        <td>{{a.address}}</td>
         <td>{{a.appointmentDate}}</td>
       </tr>
       {% endfor %}

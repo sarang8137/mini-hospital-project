@@ -279,11 +279,11 @@
       <img src="{% static patient.profile_pic.url %}" alt="Profile Pic" />
       <br><br>
       <h6>Patient</h6>
-      <h2>{{request.user.first_name}}</h2>
+      <h2>{{request.user.Name}}</h2>
     </header>
     <ul>
       <li tabindex="0" class="icon-calendar"> <a style="color:white; text-decoration:none;" href="{% url 'patappo' %}"><span>Appointments</span></a></li>
-      <li tabindex="0" class="icon-users"> <a style="color:white; text-decoration:none;" href="{% url 'discharge' %}"><span>Discharge</span></a></li>
+
     </ul>
   </nav>
   <main>
@@ -308,23 +308,3 @@
     {% block content %}
     {% endblock content %}
     <!-- content end-->
-    <br><br><br><br><br><br><br>
-    <footer>
-     
-      <br>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-sm-12">
-            <div style="color:#ffffff;" class="wow fadeInUp footer-copyright">
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </main>
- 
-
-</body>
-
-</html>

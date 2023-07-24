@@ -12,5 +12,4 @@ urlpatterns = [
     path('docpat',DoctorPatient.as_view(),name="docpat"),
     path('docpatappo',DoctorAppointment.as_view(),name="docpatappo"),
     path('docpatview',DoctorPatientView.as_view(),name="docpatview"),
-    path('docpatdischarge',DoctorPatientDischarge.as_view(),name="docpatdischarge"),
 ]

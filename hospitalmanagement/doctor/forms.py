@@ -58,7 +58,7 @@ class PatientForm(forms.ModelForm):
     # assignedDoctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Name and Department", to_field_name="user_id")
     class Meta:
         model=Patient
-        fields=['address','mobile','status','symptoms','profile_pic']
+        fields=['Name','address','mobile','status','symptoms','profile_pic']
 
 
 
@@ -67,7 +67,7 @@ class AppointmentForm(forms.ModelForm):
     # patientId=forms.ModelChoiceField(queryset=models.Patient.objects.all().filter(status=True),empty_label="Patient Name and Symptoms", to_field_name="user_id")
     class Meta:
         model=Appointment
-        fields=['description','status']
+        fields=['patientName','doctorName','description','status']
 
 
 class PatientAppointmentForm(forms.ModelForm):

@@ -15,31 +15,24 @@ from patient.models import Appointment
 class PatientBase(TemplateView):
     template_name="patient_base.html"
     
-class PatientAppo(TemplateView):
-    template_name="patient_book_appointment.html"
-
-class PatientDischarge(TemplateView):
-    template_name="patient_discharge.html"
-    
-
 
 
 
 class PatientSignUp(View):
     def get(self,request,*args,**kwargs):
-        form=PatientUserForm()
+        #form=PatientUserForm()
         form1=PatientForm()
-        return render(request,"patientsignup.html",{"form":form,"form1":form1})
+        return render(request,"patientsignup.html",{"form1":form1})
     def post(self,request,*args,**Kwargs):
-        form_data=PatientUserForm(data=request.POST)
+        #form_data=PatientUserForm(data=request.POST)
         form_data1=PatientForm(data=request.POST)
-        if form_data.is_valid() and form_data1.is_valid():
-            form_data.save()
+        if form_data1.is_valid():
+           # form_data.save()
             form_data1.save()
             messages.success(request,"Registration Success")
             return redirect("home")
         else:
-            return render(request,"patientsignup.html",{"form":form_data,"form1":form_data1})
+            return render(request,"patientsignup.html",{"form1":form_data1})
 
 class PatientSignInView(View):
     def get(self,request,*args,**kwargs):
@@ -62,39 +55,45 @@ class PatientSignInView(View):
         else:
             return render(request,"patientlogin.html",{"form":form_date})
 
-class PatientAppointment(View):
+# class PatientAppo(View):
+#     def get(self,request,*args,**kwargs):
+#         form=AppointmentForm()
+#         doc=Doctor.objects.all()
+#         return render(request,"patient_book_appointment.html",{"form":form,"doc":doc})
+#     def post(self,request,*args,**kwargs):
+#         form_data=AppointmentForm(data=request.POST)
+#         if form_data.is_valid():
+#             form_data.save()
+#             messages.success(request,"Registration Success")
+#             return redirect("home")
+#         else:
+#             print(form_data.errors)
+#             return render(request,"patientsignup.html",{"form":form_data})
+   
+
+class PatientAppo(TemplateView):
+    template_name="patient_book_appointment.html"
     def get(self,request,*args,**kwargs):
         form=AppointmentForm()
         doc=Doctor.objects.all()
         return render(request,"patient_book_appointment.html",{"form":form,"doc":doc})
-    def post(self,request,*args,**kwargs):
-        form_data=AppointmentForm(data=request.POST)
-        if form_data.is_valid():
-            form_data.save()
-            messages.success(request,"Registration Success")
-            return redirect("home")
-        else:
-            return render(request,"patientsignup.html",{"form":form_data})
+    def post(self,request):
+        # patid=request.POST.get("patname")
+        # docid=request.POST.get("patname")
+        patname=request.POST.get("patname")
+        docname=request.POST.get("docname")
+        appdate=request.POST.get("appdate")
+        desc=request.POST.get("desc")
+        sts=request.POST.get("sts")
 
-# class PatientAppointment(TemplateView):
-#     template_name="patient_book_appointment"
-#     def post(self,request):
-#         pat=request.POST.get("pat")
-#         doc=request.POST.get("doc")
-#         patname=request.POST.get("patname")
-#         docname=request.POST.get("docname")
-#         appdate=request.POST.get("appdate")
-#         desc=request.POST.get("desc")
-#         sts=request.POST.get("sts")
-
-#         Appointment.objects.create(
-#             patient=pat,
-#             doctor=doc,
-#             patientName=patname,
-#             doctorName=docname,
-#             appointmentDate=appdate,
-#             description=desc,
-#             status=sts
-#         )
-#         return render(request,"patientsignup.html")
+        Appointment.objects.create(
+            # patient=patid,
+            # doctor=docid,
+            patientName=patname,
+            doctorName=docname,
+            appointmentDate=appdate,
+            description=desc,
+            status=sts
+        )
+        return render(request,"index.html")
     
