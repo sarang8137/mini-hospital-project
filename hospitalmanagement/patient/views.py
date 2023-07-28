@@ -55,21 +55,6 @@ class PatientSignInView(View):
         else:
             return render(request,"patientlogin.html",{"form":form_date})
 
-# class PatientAppo(View):
-#     def get(self,request,*args,**kwargs):
-#         form=AppointmentForm()
-#         doc=Doctor.objects.all()
-#         return render(request,"patient_book_appointment.html",{"form":form,"doc":doc})
-#     def post(self,request,*args,**kwargs):
-#         form_data=AppointmentForm(data=request.POST)
-#         if form_data.is_valid():
-#             form_data.save()
-#             messages.success(request,"Registration Success")
-#             return redirect("home")
-#         else:
-#             print(form_data.errors)
-#             return render(request,"patientsignup.html",{"form":form_data})
-   
 
 class PatientAppo(TemplateView):
     template_name="patient_book_appointment.html"
@@ -97,3 +82,8 @@ class PatientAppo(TemplateView):
         )
         return render(request,"index.html")
     
+class ViewAppointment(View):
+    def get(self,request,*args,**kwargs):
+            data=Appointment.objects.all()
+            return render(request,"patient_view_appointment.html",{"data":data})
+

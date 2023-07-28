@@ -11,5 +11,8 @@ urlpatterns = [
     path('docbase',DoctorBase.as_view(),name="docbase"),
     path('docpat',DoctorPatient.as_view(),name="docpat"),
     path('docpatappo',DoctorAppointment.as_view(),name="docpatappo"),
+    path('approve',ApproveAppointment.as_view(),name="approve"),
     path('docpatview',DoctorPatientView.as_view(),name="docpatview"),
+    path('deleteappo',DeleteAppointment.as_view(),name="deleteappo"),
+    path('confirm',ConfirmAppointment.as_view(),name="confirm"),
 ]

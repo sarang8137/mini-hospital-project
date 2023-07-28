@@ -42,6 +42,12 @@ class DoctorAppointment(View):
     def get(self,request,*args,**kwargs):
             data=Appointment.objects.all()
             return render(request,"doctor_view_appointment.html",{"data":data})
+    
+class ApproveAppointment(View):
+    def get(self,request,*args,**kwargs):
+            data=Appointment.objects.all()
+            return render(request,"approve_appointment.html",{"data":data})
+
 
 class DoctorPatientView(View):
     # template_name="doctor_view_patient.html"
@@ -93,3 +99,20 @@ class LgOut(View):
     def get(selg,request,*args,**kwargs):
         logout(request)
         return redirect("nav")
+    
+class DeleteAppointment(View):
+    def get(self,request,*args,**kwargs):
+        id=kwargs.get("id")
+        Appointment.objects.filter(id=id).delete()
+        messages.success(request,"Appointment Deleted")
+        return redirect("approve")
+    
+class ConfirmAppointment(View):
+    def get(self,request,*args,**kwargs):
+        id=kwargs.get("id")
+        Appointment.objects.filter(id=id)
+        Appointment.status=True
+        Appointment.save()
+        return redirect("approve")
+    
+
