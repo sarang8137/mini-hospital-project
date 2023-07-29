@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 # Create your views here.
 
@@ -45,7 +46,7 @@ class DoctorAppointment(View):
     
 class ApproveAppointment(View):
     def get(self,request,*args,**kwargs):
-            data=Appointment.objects.all()
+            data=Appointment.objects.filter(~Q(status=1))
             return render(request,"approve_appointment.html",{"data":data})
 
 
@@ -110,9 +111,9 @@ class DeleteAppointment(View):
 class ConfirmAppointment(View):
     def get(self,request,*args,**kwargs):
         id=kwargs.get("id")
-        Appointment.objects.filter(id=id)
-        Appointment.status=True
-        Appointment.save()
+        res=Appointment.objects.get(id=id)
+        res.status="True"
+        res.save()
         return redirect("approve")
     
 
